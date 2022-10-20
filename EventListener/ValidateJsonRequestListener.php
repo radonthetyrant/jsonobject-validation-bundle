@@ -9,18 +9,11 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 class ValidateJsonRequestListener
 {
-    /** @var JsonValidator */
-    protected $jsonValidator;
-
-    public function __construct(JsonValidator $jsonValidator)
+    public function __construct(protected JsonValidator $jsonValidator)
     {
-        $this->jsonValidator = $jsonValidator;
     }
 
-    /**
-     * @param ControllerEvent|FilterControllerEvent $event
-     */
-    public function onKernelController($event): void
+    public function onKernelController(ControllerEvent $event): void
     {
         $request = $event->getRequest();
 

@@ -39,6 +39,6 @@ class JsonValidationExtension extends ConfigurableExtension
      */
     public function getAlias(): string
     {
-        return 'mrsuh_json_validation';
+        return 'json_validation';
     }
 }
