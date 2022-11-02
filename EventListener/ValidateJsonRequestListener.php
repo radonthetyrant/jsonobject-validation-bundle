@@ -5,17 +5,26 @@ namespace Mrsuh\JsonValidationBundle\EventListener;
 use Mrsuh\JsonValidationBundle\Annotation\ValidateJsonRequest;
 use Mrsuh\JsonValidationBundle\Exception\JsonValidationRequestException;
 use Mrsuh\JsonValidationBundle\JsonValidator\JsonValidator;
+use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 class ValidateJsonRequestListener
 {
-    public function __construct(protected JsonValidator $jsonValidator)
+    public function __construct(
+        protected JsonValidator $jsonValidator,
+        protected array $validationConfig = [],
+    )
     {
     }
 
     public function onKernelController(ControllerEvent $event): void
     {
         $request = $event->getRequest();
+
+        dump($this->validationConfig);
+        if (empty($this->validationConfig)) {
+            return;
+        }
 
         $annotationAlias = sprintf('_%s', ValidateJsonRequest::ALIAS);
 
@@ -55,6 +64,12 @@ class ValidateJsonRequestListener
             $request->attributes->set('validJson', $objectData);
         }
     }
+
+    public function onKernelControllerArguments(ControllerArgumentsEvent $event): void
+    {
+        dump($event);
+    }
+
 
     /**
      * Decide whether the validated JSON should be decoded as an array
