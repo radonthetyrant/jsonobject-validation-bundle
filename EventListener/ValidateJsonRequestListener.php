@@ -21,7 +21,6 @@ class ValidateJsonRequestListener
     {
         $request = $event->getRequest();
 
-        dump($this->validationConfig);
         if (empty($this->validationConfig)) {
             return;
         }
@@ -67,7 +66,7 @@ class ValidateJsonRequestListener
 
     public function onKernelControllerArguments(ControllerArgumentsEvent $event): void
     {
-        dump($event);
+        dump("CE");
     }
 
 
