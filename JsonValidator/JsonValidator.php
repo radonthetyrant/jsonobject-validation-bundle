@@ -22,7 +22,7 @@ class JsonValidator
         $this->schemaDir = $schemaDir;
     }
 
-    public function validate(string $json, string $schemaPath)
+    public function validate(string|array|object $json, string $schemaPath)
     {
         $this->errors = [];
         $schema       = null;
@@ -40,7 +40,11 @@ class JsonValidator
             return null;
         }
 
-        $data = json_decode($json);
+        if (is_string($json)) {
+            $data = json_decode($json);
+        } else {
+            $data = (object) $json;
+        }
 
         if ($data === null) {
             $this->errors[] = [

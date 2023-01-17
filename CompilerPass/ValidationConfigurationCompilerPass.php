@@ -49,18 +49,21 @@ class ValidationConfigurationCompilerPass implements CompilerPassInterface
                     trigger_error(sprintf($s, $controllerClass, $reflMethod->getName(), ValidateJsonRequest::class), E_USER_WARNING);
                 }
 
-                $classMapKey = sprintf('%s::%s', $controllerClass, $reflMethod->getName());
+                $controllerKey = sprintf('%s::%s', $controllerClass, $reflMethod->getName());
+                if (!str_contains($schemaPath = $validateAttribute->getPath(), '.json')) {
+                    $schemaPath .= '.json';
+                }
                 $config = [
                     'methods' => $validateAttribute->getMethods(),
-                    'emptyIsValid' => $validateAttribute->getEmptyIsValid(),
-                    'path' => $validateAttribute->getPath(),
+                    'path' => $schemaPath,
                     'queryParamsIncluded' => $validateAttribute->isQueryParamsIncluded(),
                 ];
-                if (is_string($validateAttribute->getClassString())) {
+                if (\is_string($validateAttribute->getClassString())) {
                     $config['argumentToReplace'] = $this->findArgumentToReplace($reflMethod, $validateAttribute);
+                    $config['argumentClassString'] = $validateAttribute->getClassString();
                 }
 
-                $validationConfig[$classMapKey] = $config;
+                $validationConfig[$controllerKey] = $config;
             }
         }
 

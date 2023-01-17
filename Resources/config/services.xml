@@ -13,6 +13,7 @@
         <service id="json_validation.request_listener"
                  class="Mrsuh\JsonValidationBundle\EventListener\ValidateJsonRequestListener">
             <argument type="service" id="json_validation.validator"/>
+            <argument type="service" id="serializer"/>
         </service>
         <service id="json_validation.response_listener"
                  class="Mrsuh\JsonValidationBundle\EventListener\ValidateJsonResponseListener">
@@ -29,7 +30,7 @@
         </service>
         <service id="json_validation.argument_value_resolver"
                  class="Mrsuh\JsonValidationBundle\ArgumentResolver\DenormalizedJsonArgumentValueResolver">
-            <tag name="controller.argument_value_resolver" priority="-100" public="true"/>
+            <tag name="controller.argument_value_resolver" priority="-40" public="true"/>
         </service>
     </services>
 

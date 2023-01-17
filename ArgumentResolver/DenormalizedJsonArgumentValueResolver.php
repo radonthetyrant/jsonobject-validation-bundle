@@ -13,13 +13,11 @@ class DenormalizedJsonArgumentValueResolver implements ArgumentValueResolverInte
 
     public function supports(Request $request, ArgumentMetadata $argument): bool
     {
-        dump("DN1", $request, $argument);
-        return true;
+        return $request->attributes->has('_replace_arguments');
     }
 
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
-        dump("DN2", $request, $argument);
-        yield from [];
+        yield from $request->attributes->get('_replace_arguments');
     }
 }
