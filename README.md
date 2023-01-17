@@ -114,7 +114,7 @@ app.WARNING: Json response validation {"uri":"http://127.0.0.1:8000/my","schemaP
 ## Configuration
 
 ```yaml
-mrsuh_json_validation:
+json_validation:
     enable_request_listener: true #default value
     enable_response_listener: true #default value
     enable_exception_listener: true #default value
