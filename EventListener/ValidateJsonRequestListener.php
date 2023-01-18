@@ -57,7 +57,7 @@ class ValidateJsonRequestListener
         );
 
         if (!empty($this->jsonValidator->getErrors())) {
-            throw new JsonValidationRequestException($request, $annotation->getPath(), $this->jsonValidator->getErrors());
+            throw new JsonValidationRequestException($request, $validationConfig['path'], $this->jsonValidator->getErrors());
         }
 
         $replacedObject = $this->denormalizer->denormalize($objectData, $validationConfig['argumentClassString'], 'request', ['request' => $request]);

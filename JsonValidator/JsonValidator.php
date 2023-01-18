@@ -2,6 +2,7 @@
 
 namespace Mrsuh\JsonValidationBundle\JsonValidator;
 
+use JsonSchema\Constraints\Constraint;
 use JsonSchema\Exception\JsonDecodingException;
 use JsonSchema\Validator;
 use Symfony\Component\Config\FileLocatorInterface;
@@ -43,7 +44,7 @@ class JsonValidator
         if (is_string($json)) {
             $data = json_decode($json);
         } else {
-            $data = (object) $json;
+            $data = $json;
         }
 
         if ($data === null) {
@@ -60,7 +61,11 @@ class JsonValidator
         $validator = new Validator();
 
         try {
-            $validator->check($data, (object)['$ref' => 'file://' . $schema]);
+            $validator->validate(
+                $data,
+                (object)['$ref' => 'file://' . $schema],
+                Constraint::CHECK_MODE_TYPE_CAST
+            );
         } catch (JsonDecodingException $e) {
             $this->errors[] = [
                 'property'   => null,
