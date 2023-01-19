@@ -43,7 +43,7 @@ class ValidateJsonRequestListener
 
         $content = $request->attributes->get('_route_params') ?? [];
         if ($request->isMethod('POST') || $request->isMethod('PATCH')) {
-            $content = $request->toArray();
+            $content = array_merge($content, $request->toArray());
         }
 
         if ($request->isMethod('GET') || $validationConfig['queryParamsIncluded']) {
