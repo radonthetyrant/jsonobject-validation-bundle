@@ -45,7 +45,7 @@ class ValidateJsonRequestListener
         $content = $request->attributes->get('_route_params') ?? [];
         if ($request->isMethod('POST') || $request->isMethod('PATCH')) {
             try {
-                $content = array_merge($content = array_merge($content, $request->toArray());
+                $content = array_merge($content, $request->toArray());
             } catch (JsonException $e) {
                 if ($e->getMessage() === 'Request body is empty.' && !$validationConfig['emptyIsValid']) {
                     throw $e;
