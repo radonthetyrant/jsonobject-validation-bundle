@@ -57,6 +57,7 @@ class ValidationConfigurationCompilerPass implements CompilerPassInterface
                     'methods' => $validateAttribute->getMethods(),
                     'path' => $schemaPath,
                     'queryParamsIncluded' => $validateAttribute->isQueryParamsIncluded(),
+                    'emptyIsValid' => $validateAttribute->getEmptyIsValid(),
                 ];
                 if (\is_string($validateAttribute->getClassString())) {
                     $config['argumentToReplace'] = $this->findArgumentToReplace($reflMethod, $validateAttribute);

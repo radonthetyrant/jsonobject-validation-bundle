@@ -6,6 +6,7 @@ use JsonSchema\Constraints\Constraint;
 use Mrsuh\JsonValidationBundle\Annotation\ValidateJsonRequest;
 use Mrsuh\JsonValidationBundle\Exception\JsonValidationRequestException;
 use Mrsuh\JsonValidationBundle\JsonValidator\JsonValidator;
+use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -43,7 +44,13 @@ class ValidateJsonRequestListener
 
         $content = $request->attributes->get('_route_params') ?? [];
         if ($request->isMethod('POST') || $request->isMethod('PATCH')) {
-            $content = array_merge($content, $request->toArray());
+            try {
+                $content = array_merge($content = array_merge($content, $request->toArray());
+            } catch (JsonException $e) {
+                if ($e->getMessage() === 'Request body is empty.' && !$validationConfig['emptyIsValid']) {
+                    throw $e;
+                }
+            }
         }
 
         if ($request->isMethod('GET') || $validationConfig['queryParamsIncluded']) {
