@@ -64,7 +64,7 @@ class JsonValidator
             $validator->validate(
                 $data,
                 (object)['$ref' => 'file://' . $schema],
-                Constraint::CHECK_MODE_TYPE_CAST
+                Constraint::CHECK_MODE_TYPE_CAST | Constraint::CHECK_MODE_EXCEPTIONS
             );
         } catch (JsonDecodingException $e) {
             $this->errors[] = [
