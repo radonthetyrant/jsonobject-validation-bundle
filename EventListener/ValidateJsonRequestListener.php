@@ -43,7 +43,7 @@ class ValidateJsonRequestListener
         }
 
         $content = $request->attributes->get('_route_params') ?? [];
-        if ($request->isMethod('POST') || $request->isMethod('PATCH')) {
+        if ($request->isMethod('POST') || $request->isMethod('PATCH') || $request->isMethod('DELETE')) {
             try {
                 $content = array_merge($content, $request->toArray());
             } catch (JsonException $e) {
