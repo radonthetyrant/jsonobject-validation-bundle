@@ -54,7 +54,7 @@ class ValidateJsonRequestListener
         }
 
         if ($request->isMethod('GET') || $validationConfig['queryParamsIncluded']) {
-            $content = array_merge($content, $request->query->all());
+            $content = array_merge($content, $request->request->all(), $request->query->all());
         }
 
         $objectData = $this->jsonValidator->validate(
