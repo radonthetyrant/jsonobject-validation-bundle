@@ -49,7 +49,7 @@ class OpisValidator extends JsonValidator
             $this->errors[] = [
                 'property'   => null,
                 'pointer'    => null,
-                'message'    => $formatter->format($err),
+                'message'    => $formatter->formatErrorMessage($err),
                 'constraint' => null,
             ];
 
