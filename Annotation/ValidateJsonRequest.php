@@ -2,11 +2,6 @@
 
 namespace Mrsuh\JsonValidationBundle\Annotation;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationAnnotation;
-
-/**
- * @Annotation
- */
 #[\Attribute(\Attribute::TARGET_METHOD)]
 class ValidateJsonRequest
 {

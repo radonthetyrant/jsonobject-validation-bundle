@@ -2,13 +2,10 @@
 
 namespace Mrsuh\JsonValidationBundle\Annotation;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationAnnotation;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @Annotation
- */
-class ValidateJsonResponse extends ConfigurationAnnotation
+#[\Attribute(\Attribute::TARGET_METHOD)]
+class ValidateJsonResponse
 {
     const ALIAS = 'validate_json_response';
 
@@ -44,8 +41,6 @@ class ValidateJsonResponse extends ConfigurationAnnotation
             $data['path'] = $data['value'];
             unset($data['value']);
         }
-
-        parent::__construct($data);
     }
 
     public function setPath(string $path): void

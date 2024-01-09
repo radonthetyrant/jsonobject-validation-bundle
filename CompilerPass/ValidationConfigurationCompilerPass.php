@@ -7,7 +7,8 @@ namespace Mrsuh\JsonValidationBundle\CompilerPass;
 use Mrsuh\JsonValidationBundle\Annotation\ValidateJsonRequest;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Annotation\Route as LegacyRoute;
+use Symfony\Component\Routing\Attribute\Route;
 
 class ValidationConfigurationCompilerPass implements CompilerPassInterface
 {
@@ -27,7 +28,7 @@ class ValidationConfigurationCompilerPass implements CompilerPassInterface
 
             foreach ($reflClass->getMethods(\ReflectionMethod::IS_PUBLIC | ~\ReflectionMethod::IS_STATIC) as $method) {
                 $reflMethod = new \ReflectionMethod($controllerClass, $method->getName());
-                $routeAttributes = $reflMethod->getAttributes(Route::class);
+                $routeAttributes = \array_merge($reflMethod->getAttributes(LegacyRoute::class), $reflMethod->getAttributes(Route::class));
                 if (\count($routeAttributes) < 1) {
                     continue;
                 }
