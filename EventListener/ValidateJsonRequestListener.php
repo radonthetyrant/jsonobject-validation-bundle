@@ -3,7 +3,6 @@
 namespace Mrsuh\JsonValidationBundle\EventListener;
 
 use JsonSchema\Constraints\Constraint;
-use Mrsuh\JsonValidationBundle\Annotation\ValidateJsonRequest;
 use Mrsuh\JsonValidationBundle\Exception\JsonValidationRequestException;
 use Mrsuh\JsonValidationBundle\JsonValidator\JsonValidator;
 use Symfony\Component\HttpFoundation\Exception\JsonException;

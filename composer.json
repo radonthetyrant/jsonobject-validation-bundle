@@ -3,15 +3,17 @@
     "description": "This bundle provides a way to validate JSON in request/response against a schema and serialize it into an object",
     "type": "symfony-bundle",
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.3",
         "ext-json": "*",
-        "symfony/config": ">=6.0",
-        "symfony/http-foundation": ">=6.0",
-        "justinrainbow/json-schema": ">=5.2",
-        "psr/log": "^3"
+        "symfony/config": "7.0.*",
+        "justinrainbow/json-schema": "^6",
+        "psr/log": "^3",
+        "symfony/dependency-injection": "7.0.*",
+        "symfony/http-kernel": "7.0.*",
+        "symfony/serializer": "7.0.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.1"
+        "phpunit/phpunit": "^10"
     },
     "license": "MIT",
     "authors": [
@@ -22,5 +24,12 @@
     ],
     "autoload": {
         "psr-4": { "Mrsuh\\JsonValidationBundle\\": "" }
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "7.0.*",
+            "docker": false
+        }
     }
 }
