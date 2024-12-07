@@ -5,7 +5,7 @@ namespace Mrsuh\JsonValidationBundle\Annotation;
 #[\Attribute(\Attribute::TARGET_METHOD)]
 class ValidateJsonRequest
 {
-    const ALIAS = 'validate_json_request';
+    const string ALIAS = 'validate_json_request';
 
     /**
      * @param null|class-string $classString
