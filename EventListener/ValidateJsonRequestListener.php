@@ -4,6 +4,7 @@ namespace Mrsuh\JsonValidationBundle\EventListener;
 
 use JsonSchema\Constraints\Constraint;
 use Mrsuh\JsonValidationBundle\Exception\JsonValidationRequestException;
+use Mrsuh\JsonValidationBundle\Exception\ValidationExceptionFactory;
 use Mrsuh\JsonValidationBundle\JsonValidator\JsonValidator;
 use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
@@ -15,6 +16,7 @@ class ValidateJsonRequestListener
 {
     public function __construct(
         protected JsonValidator $jsonValidator,
+        protected ValidationExceptionFactory $validationExceptionFactory,
         protected DenormalizerInterface $denormalizer,
         protected array $validationConfig = [],
     )
@@ -59,11 +61,10 @@ class ValidateJsonRequestListener
         $objectData = $this->jsonValidator->validate(
             $content,
             $validationConfig['path'],
-            Constraint::CHECK_MODE_TYPE_CAST
         );
 
         if (!empty($this->jsonValidator->getErrors())) {
-            throw new JsonValidationRequestException($request, $validationConfig['path'], $this->jsonValidator->getErrors());
+            throw $this->validationExceptionFactory->createException($request, $validationConfig, $this->jsonValidator->getErrors());
         }
 
         $replacedObject = $this->denormalizer->denormalize($objectData, $validationConfig['argumentClassString'], 'request', ['request' => $request]);

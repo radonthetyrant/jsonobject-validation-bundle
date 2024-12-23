@@ -10,9 +10,13 @@
             <argument type="service" id="file_locator"/>
             <argument>%kernel.project_dir%/src</argument>
         </service>
+        <service id="json_validation_exception_factory"
+                class="Mrsuh\JsonValidationBundle\Exception\DefaultValidationExceptionFactory">
+        </service>
         <service id="json_validation.request_listener"
                  class="Mrsuh\JsonValidationBundle\EventListener\ValidateJsonRequestListener">
             <argument type="service" id="json_validation.validator"/>
+            <argument type="service" id="json_validation_exception_factory"/>
             <argument type="service" id="serializer"/>
         </service>
         <service id="json_validation.response_listener"
