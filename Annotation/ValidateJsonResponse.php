@@ -2,8 +2,6 @@
 
 namespace Mrsuh\JsonValidationBundle\Annotation;
 
-use Symfony\Component\HttpFoundation\Response;
-
 #[\Attribute(\Attribute::TARGET_METHOD)]
 class ValidateJsonResponse
 {
