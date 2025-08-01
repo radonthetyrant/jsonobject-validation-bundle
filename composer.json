@@ -5,13 +5,13 @@
     "require": {
         "php": ">=8.3",
         "ext-json": "*",
-        "symfony/config": "7.1.*",
+        "symfony/config": "^7",
         "justinrainbow/json-schema": "^6",
         "psr/log": "^3",
-        "symfony/dependency-injection": "7.1.*",
-        "symfony/http-kernel": "7.1.*",
-        "symfony/serializer": "7.1.*",
-        "symfony/routing": "7.1.*"
+        "symfony/dependency-injection": "^7",
+        "symfony/http-kernel": "^7",
+        "symfony/serializer": "^7",
+        "symfony/routing": "^7"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest"
@@ -31,7 +31,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.1.*",
+            "require": "^7",
             "docker": false
         }
     }
